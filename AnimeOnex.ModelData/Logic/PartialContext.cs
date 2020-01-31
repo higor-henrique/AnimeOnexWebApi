@@ -1,13 +1,12 @@
-﻿
-namespace AnimeOnex.ModelData.Logic
+﻿namespace AnimeOnex.ModelData.Logic
 {
     using System.Data.Entity;
-	public class AnimeOnexEntities: DbContext
-	{
 
-		public AnimeOnexEntities(string connection) : base(connection)
-		{
-		}
+    public partial class AnimeOnexDBEntities: DbContext
+    {
+        public AnimeOnexDBEntities(string connection) : base(connection)
+        {
 
-	}
+        }
+    }
 }
