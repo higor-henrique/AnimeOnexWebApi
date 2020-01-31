@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-
+﻿
 namespace AnimeOnex.ModelData.Logic
 {
+    using System.Data.Entity;
 	public class AnimeOnexEntities: DbContext
 	{
+
+		public AnimeOnexEntities(string connection) : base(connection)
+		{
+		}
+
 	}
 }

@@ -17,25 +17,25 @@ namespace AnimeOnex.Service.Logic
 		public Object Add(Usuario ususario)
 		{
 
-			return anime;
+			return ususario;
 		}
 
 		public Object Read(Usuario ususario)
 		{
 
-			return anime;
+			return ususario;
 		}
 
 		public Object Delete(Usuario ususario)
 		{
 
-			return anime;
+			return ususario;
 		}
 
 		public Object Browsable(Usuario ususario)
 		{
 
-			return anime;
+			return ususario;
 		}
 	}
 }

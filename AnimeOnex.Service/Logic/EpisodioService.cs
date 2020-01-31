@@ -13,5 +13,30 @@ namespace AnimeOnex.Service.Logic
 		{
 			AnimeOnexEntities = new AnimeOnexEntities();
 		}
+
+		public Object Add(Episodio episodio)
+		{
+
+			return episodio;
+		}
+
+		public Object Read(Episodio episodio)
+		{
+
+			return episodio;
+		}
+
+		public Object Delete(Episodio episodio)
+		{
+
+			return episodio;
+		}
+
+		public Object Browsable(Episodio episodio)
+		{
+
+			return episodio;
+		}
 	}
+}
 }
