@@ -11,7 +11,7 @@ namespace AnimeOnex.Service.Logic
 	public class UsuarioService
 	{
 		private AnimeOnexDBEntities context = null;
-		UsuarioService()
+		public UsuarioService()
 		{
 			context = new AnimeOnexDBEntities();
 		}
