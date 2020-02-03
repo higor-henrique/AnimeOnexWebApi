@@ -105,10 +105,6 @@
       <Project>{3d8df93d-046d-424c-acfb-da421f66629a}</Project>
       <Name>AnimeOnex.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AnimeOnexWebAPI\AnimeOnexWebAPI.csproj">
-      <Project>{a19c8b40-e468-4c30-ba53-10d8c7d97b1f}</Project>
-      <Name>AnimeOnexWebAPI</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

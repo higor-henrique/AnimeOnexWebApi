@@ -8,10 +8,10 @@ namespace AnimeOnex.Service.Logic
 {
 	public class EpisodioService
 	{
-		private AnimeOnexEntities AnimeOnexEntities = null;
+		private AnimeOnexDBEntities AnimeOnexEntities = null;
 		EpisodioService()
 		{
-			AnimeOnexEntities = new AnimeOnexEntities();
+			AnimeOnexEntities = new AnimeOnexDBEntities();
 		}
 
 		public Object Add(Episodio episodio)
@@ -38,5 +38,4 @@ namespace AnimeOnex.Service.Logic
 			return episodio;
 		}
 	}
-}
 }

@@ -9,10 +9,10 @@ namespace AnimeOnex.Service.Logic
 	public class ComentarioService
 	{
 
-		private AnimeOnexEntities AnimeOnexEntities = null;
+		private AnimeOnexDBEntities context = null;
 		ComentarioService()
 		{
-			AnimeOnexEntities = new AnimeOnexEntities();
+			context = new AnimeOnexDBEntities();
 		}
 
 		public Object Add(Comentario comentario)
@@ -39,5 +39,4 @@ namespace AnimeOnex.Service.Logic
 			return comentario;
 		}
 	}
-}
 }
