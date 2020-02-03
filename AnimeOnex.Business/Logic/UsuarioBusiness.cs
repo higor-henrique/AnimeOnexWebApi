@@ -31,11 +31,12 @@ namespace AnimeOnex.Business.Logic
             return this.usuarioService.CountUsingParams(predicate);
         }
 
-        public UsuarioEnvelopeJson Add(UsuarioService instance)
+        public UsuarioEnvelopeJson Add(UsuarioEnvelopeJson instance)
         {
             Usuario usuario = Mapper.Map<UsuarioEnvelopeJson, Usuario>(instance);
             usuario.nickname = usuario.nickname.ToUpper();
-            return Mapper.Map<Usuario, UsuarioEnvelopeJson]>(usuario);
+            usuario = this.usuarioService.Add(usuario);
+            return Mapper.Map<UsuarioEnvelopeJson,Usuario>(usuario);
         }
 
         public void Edit(UsuarioEnvelopeJson instance, bool comSenha = false)

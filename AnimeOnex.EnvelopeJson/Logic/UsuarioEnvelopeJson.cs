@@ -18,8 +18,11 @@ namespace AnimeOnex.EnvelopeJson.Logic
         [JsonProperty(PropertyName = "senha")]
         public string senha { get; set; }
 
-         
-        
+        [JsonProperty(PropertyName = "Comentario")]
+        public ComentarioEnvelopeJson comentario { get; set; }
+
+
+
 
     }
 }

@@ -8,18 +8,19 @@ namespace AnimeOnex.Service.Logic
 {
 	public class AnimeService
 	{
-		private AnimeOnexEntities AnimeOnexEntities= null;
+		private AnimeOnexDBEntities context= null;
 		AnimeService(){
-			AnimeOnexEntities = new AnimeOnexEntities();
+			context = new AnimeOnexDBEntities();
 		}
 
-		public Object Add(Anime anime)
+		public Anime Add(Anime entity)
 		{
-
-			return anime;
+			context.Anime.Add(entity);
+			context.SaveChanges();
+			return entity;
 		}
 
-		public Object Read(Anime anime)
+		public  Read(Anime anime)
 		{
 
 			return anime;
