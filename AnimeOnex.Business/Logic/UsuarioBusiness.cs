@@ -36,7 +36,7 @@ namespace AnimeOnex.Business.Logic
             Usuario usuario = Mapper.Map<UsuarioEnvelopeJson, Usuario>(instance);
             usuario.nickname = usuario.nickname.ToUpper();
             usuario = this.usuarioService.Add(usuario);
-            return Mapper.Map<UsuarioEnvelopeJson,Usuario>(usuario);
+            return Mapper.Map<Usuario,UsuarioEnvelopeJson>(usuario);
         }
 
         public void Edit(UsuarioEnvelopeJson instance, bool comSenha = false)
@@ -48,23 +48,15 @@ namespace AnimeOnex.Business.Logic
             }
             else
             {
-                this.academicoService.Edit(academico);
+                this.usuarioService.Edit(academico);
 
-                if (instance.MaeNaoInformadaCertidao)
-                {
-                    FamiliaAcademicoEnvelopeJson familiaAcademico = this.familiaAcademicoBusiness.Browse(f => f.AcademicoID == instance.AcademicoID && f.GrauParentesco == EGrauParentesco.Mae.ToString()).SingleOrDefault();
 
-                    if (familiaAcademico != null)
-                    {
-                        this.familiaAcademicoService.Delete(familiaAcademico.FamiliaAcademicoID);
-                    }
-                }
             }
         }
 
         public IQueryable<Usuario> Browsable(Expression<Func<Usuario, bool>> predicate = null)
         {
-            return this.UsuarioService.Browsable(predicate);
+            return this.usuarioService.Browsable(predicate);
         }
 
         public UsuarioEnvelopeJson Read(Expression<Func<Usuario, bool>> filter)
