@@ -20,11 +20,6 @@ namespace AnimeOnex.Service.Logic
 			return entity;
 		}
 
-		public  Read(Anime anime)
-		{
-
-			return anime;
-		}
 
 		public Object Delete(Anime anime)
 		{
