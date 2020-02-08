@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AnimeOnexDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Anime">
+          <Key>
+            <PropertyRef Name="animeID" />
+          </Key>
+          <Property Name="animeID" Type="int" Nullable="false" />
+          <Property Name="titulo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="dataEstreia" Type="datetime" />
+          <Property Name="numeroDeTemporadas" Type="int" />
+          <Property Name="quantidadeDeEpisodios" Type="int" />
+          <Property Name="studio" Type="nvarchar" MaxLength="25" />
+          <Property Name="sinopse" Type="nvarchar" MaxLength="300" />
+          <Property Name="caminhoDaImagem" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comentario">
+          <Key>
+            <PropertyRef Name="comentarioID" />
+          </Key>
+          <Property Name="comentarioID" Type="int" Nullable="false" />
+          <Property Name="usuarioID" Type="int" Nullable="false" />
+          <Property Name="episodioID" Type="int" Nullable="false" />
+          <Property Name="texto" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="dataComentario" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Episodio">
+          <Key>
+            <PropertyRef Name="episodioID" />
+          </Key>
+          <Property Name="episodioID" Type="int" Nullable="false" />
+          <Property Name="animeID" Type="int" Nullable="false" />
+          <Property Name="titulo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="vizualizacoes" Type="int" Nullable="false" />
+          <Property Name="duracaoMin" Type="int" Nullable="false" />
+          <Property Name="numeroDoEpisodio" Type="int" Nullable="false" />
+          <Property Name="caminhoDoArquivo" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="usuarioID" />
+          </Key>
+          <Property Name="usuarioID" Type="int" Nullable="false" />
+          <Property Name="nickname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="senha" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="caminhoDaImagem" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__Comentari__episo__3F466844">
+          <End Role="Episodio" Type="Self.Episodio" Multiplicity="1" />
+          <End Role="Comentario" Type="Self.Comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Episodio">
+              <PropertyRef Name="episodioID" />
+            </Principal>
+            <Dependent Role="Comentario">
+              <PropertyRef Name="episodioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comentari__usuar__3E52440B">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Comentario" Type="Self.Comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="usuarioID" />
+            </Principal>
+            <Dependent Role="Comentario">
+              <PropertyRef Name="usuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Episodio__animeI__3B75D760">
+          <End Role="Anime" Type="Self.Anime" Multiplicity="1" />
+          <End Role="Episodio" Type="Self.Episodio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Anime">
+              <PropertyRef Name="animeID" />
+            </Principal>
+            <Dependent Role="Episodio">
+              <PropertyRef Name="animeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AnimeOnexDBModelStoreContainer">
+          <EntitySet Name="Anime" EntityType="Self.Anime" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comentario" EntityType="Self.Comentario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Episodio" EntityType="Self.Episodio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Comentari__episo__3F466844" Association="Self.FK__Comentari__episo__3F466844">
+            <End Role="Episodio" EntitySet="Episodio" />
+            <End Role="Comentario" EntitySet="Comentario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comentari__usuar__3E52440B" Association="Self.FK__Comentari__usuar__3E52440B">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Comentario" EntitySet="Comentario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Episodio__animeI__3B75D760" Association="Self.FK__Episodio__animeI__3B75D760">
+            <End Role="Anime" EntitySet="Anime" />
+            <End Role="Episodio" EntitySet="Episodio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AnimeOnexDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Anime">
+          <Key>
+            <PropertyRef Name="animeID" />
+          </Key>
+          <Property Name="animeID" Type="Int32" Nullable="false" />
+          <Property Name="titulo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dataEstreia" Type="DateTime" Precision="3" />
+          <Property Name="numeroDeTemporadas" Type="Int32" />
+          <Property Name="quantidadeDeEpisodios" Type="Int32" />
+          <Property Name="studio" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="sinopse" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="caminhoDaImagem" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Episodio" Relationship="Self.FK__Episodio__animeI__3B75D760" FromRole="Anime" ToRole="Episodio" />
+        </EntityType>
+        <EntityType Name="Comentario">
+          <Key>
+            <PropertyRef Name="comentarioID" />
+          </Key>
+          <Property Name="comentarioID" Type="Int32" Nullable="false" />
+          <Property Name="usuarioID" Type="Int32" Nullable="false" />
+          <Property Name="episodioID" Type="Int32" Nullable="false" />
+          <Property Name="texto" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dataComentario" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Episodio" Relationship="Self.FK__Comentari__episo__3F466844" FromRole="Comentario" ToRole="Episodio" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Comentari__usuar__3E52440B" FromRole="Comentario" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Episodio">
+          <Key>
+            <PropertyRef Name="episodioID" />
+          </Key>
+          <Property Name="episodioID" Type="Int32" Nullable="false" />
+          <Property Name="animeID" Type="Int32" Nullable="false" />
+          <Property Name="titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="vizualizacoes" Type="Int32" Nullable="false" />
+          <Property Name="duracaoMin" Type="Int32" Nullable="false" />
+          <Property Name="numeroDoEpisodio" Type="Int32" Nullable="false" />
+          <Property Name="caminhoDoArquivo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Anime" Relationship="Self.FK__Episodio__animeI__3B75D760" FromRole="Episodio" ToRole="Anime" />
+          <NavigationProperty Name="Comentario" Relationship="Self.FK__Comentari__episo__3F466844" FromRole="Episodio" ToRole="Comentario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="usuarioID" />
+          </Key>
+          <Property Name="usuarioID" Type="Int32" Nullable="false" />
+          <Property Name="nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="senha" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="caminhoDaImagem" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Comentario" Relationship="Self.FK__Comentari__usuar__3E52440B" FromRole="Usuario" ToRole="Comentario" />
+        </EntityType>
+        <Association Name="FK__Episodio__animeI__3B75D760">
+          <End Role="Anime" Type="Self.Anime" Multiplicity="1" />
+          <End Role="Episodio" Type="Self.Episodio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Anime">
+              <PropertyRef Name="animeID" />
+            </Principal>
+            <Dependent Role="Episodio">
+              <PropertyRef Name="animeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comentari__episo__3F466844">
+          <End Role="Episodio" Type="Self.Episodio" Multiplicity="1" />
+          <End Role="Comentario" Type="Self.Comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Episodio">
+              <PropertyRef Name="episodioID" />
+            </Principal>
+            <Dependent Role="Comentario">
+              <PropertyRef Name="episodioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comentari__usuar__3E52440B">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Comentario" Type="Self.Comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="usuarioID" />
+            </Principal>
+            <Dependent Role="Comentario">
+              <PropertyRef Name="usuarioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AnimeOnexDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Anime" EntityType="Self.Anime" />
+          <EntitySet Name="Comentario" EntityType="Self.Comentario" />
+          <EntitySet Name="Episodio" EntityType="Self.Episodio" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__Episodio__animeI__3B75D760" Association="Self.FK__Episodio__animeI__3B75D760">
+            <End Role="Anime" EntitySet="Anime" />
+            <End Role="Episodio" EntitySet="Episodio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comentari__episo__3F466844" Association="Self.FK__Comentari__episo__3F466844">
+            <End Role="Episodio" EntitySet="Episodio" />
+            <End Role="Comentario" EntitySet="Comentario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comentari__usuar__3E52440B" Association="Self.FK__Comentari__usuar__3E52440B">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Comentario" EntitySet="Comentario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AnimeOnexDBModelStoreContainer" CdmEntityContainer="AnimeOnexDBEntities">
+          <EntitySetMapping Name="Anime">
+            <EntityTypeMapping TypeName="AnimeOnexDBModel.Anime">
+              <MappingFragment StoreEntitySet="Anime">
+                <ScalarProperty Name="animeID" ColumnName="animeID" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="dataEstreia" ColumnName="dataEstreia" />
+                <ScalarProperty Name="numeroDeTemporadas" ColumnName="numeroDeTemporadas" />
+                <ScalarProperty Name="quantidadeDeEpisodios" ColumnName="quantidadeDeEpisodios" />
+                <ScalarProperty Name="studio" ColumnName="studio" />
+                <ScalarProperty Name="sinopse" ColumnName="sinopse" />
+                <ScalarProperty Name="caminhoDaImagem" ColumnName="caminhoDaImagem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comentario">
+            <EntityTypeMapping TypeName="AnimeOnexDBModel.Comentario">
+              <MappingFragment StoreEntitySet="Comentario">
+                <ScalarProperty Name="comentarioID" ColumnName="comentarioID" />
+                <ScalarProperty Name="usuarioID" ColumnName="usuarioID" />
+                <ScalarProperty Name="episodioID" ColumnName="episodioID" />
+                <ScalarProperty Name="texto" ColumnName="texto" />
+                <ScalarProperty Name="dataComentario" ColumnName="dataComentario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Episodio">
+            <EntityTypeMapping TypeName="AnimeOnexDBModel.Episodio">
+              <MappingFragment StoreEntitySet="Episodio">
+                <ScalarProperty Name="episodioID" ColumnName="episodioID" />
+                <ScalarProperty Name="animeID" ColumnName="animeID" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="vizualizacoes" ColumnName="vizualizacoes" />
+                <ScalarProperty Name="duracaoMin" ColumnName="duracaoMin" />
+                <ScalarProperty Name="numeroDoEpisodio" ColumnName="numeroDoEpisodio" />
+                <ScalarProperty Name="caminhoDoArquivo" ColumnName="caminhoDoArquivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="AnimeOnexDBModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="usuarioID" ColumnName="usuarioID" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+                <ScalarProperty Name="caminhoDaImagem" ColumnName="caminhoDaImagem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

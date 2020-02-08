@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace AnimeOnexWebAPI.Controllers
 {
-    public class UsuarioController : ApiController
+    public class ssuarioController : ApiController
     {
         // GET api/<controller>
         public IEnumerable<string> Get()

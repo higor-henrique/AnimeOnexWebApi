@@ -9,10 +9,10 @@ using AnimeOnex.ModelData.Logic;
 
 namespace AnimeOnex.Business.Logic
 {
-    public class UsuarioBusiness
+    public class UsuarioBusiness 
     {
         private UsuarioService usuarioService;
-
+        
         public UsuarioBusiness()
         {
             usuarioService = new UsuarioService();
@@ -36,15 +36,15 @@ namespace AnimeOnex.Business.Logic
             Usuario usuario = Mapper.Map<UsuarioEnvelopeJson, Usuario>(instance);
             usuario.nickname = usuario.nickname.ToUpper();
             usuario = this.usuarioService.Add(usuario);
-            return Mapper.Map<Usuario, UsuarioEnvelopeJson>(usuario);
+            return Mapper.Map<Usuario,UsuarioEnvelopeJson>(usuario);
         }
 
         public void Edit(UsuarioEnvelopeJson instance, bool comSenha = false)
         {
-            Usuario academico = Mapper.Map<UsuarioEnvelopeJson, Usuario>(instance);
+            Usuario academico = Mapper.Map<UsuarioEnvelopeJson,Usuario>(instance);
             if (comSenha)
             {
-                // this.usuarioService.EditWithPassword(Usuario);
+            // this.usuarioService.EditWithPassword(Usuario);
             }
             else
             {

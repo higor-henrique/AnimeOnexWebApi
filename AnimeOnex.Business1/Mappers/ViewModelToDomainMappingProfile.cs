@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using AutoMapper;
-using AnimeOnex.EnvelopeJson.Logic;
 using AnimeOnex.ModelData.Logic;
+using AnimeOnex.EnvelopeJson.Logic;
 
 namespace AnimeOnex.Business.Mappers
 {
-    public class DomainToViewModelMappingProfile : Profile
+    public class ViewModelToDomainMappingProfile : Profile
     {
-        public DomainToViewModelMappingProfile()
+        public ViewModelToDomainMappingProfile()
         {
-            CreateMap<Usuario, UsuarioEnvelopeJson>();
+            CreateMap<UsuarioEnvelopeJson, Usuario>();
         }
-
     }
 }
