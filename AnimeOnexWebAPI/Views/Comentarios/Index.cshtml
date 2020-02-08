@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AnimeOnex.ModelData.Logic.Comentario>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.texto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dataComentario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Episodio.titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.nickname)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.texto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dataComentario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Episodio.titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.nickname)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.comentarioID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.comentarioID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.comentarioID })
+        </td>
+    </tr>
+}
+
+</table>

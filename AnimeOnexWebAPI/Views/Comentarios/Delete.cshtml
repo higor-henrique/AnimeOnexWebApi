@@ -1,0 +1,56 @@
+﻿@model AnimeOnex.ModelData.Logic.Comentario
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Comentario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.texto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.texto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataComentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataComentario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Episodio.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Episodio.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.nickname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.nickname)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

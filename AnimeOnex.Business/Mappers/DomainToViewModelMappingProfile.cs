@@ -8,12 +8,12 @@ using AnimeOnex.ModelData.Logic;
 
 namespace AnimeOnex.Business.Mappers
 {
-    public class DomainToViewModelMappingProfile: Profile
+    public class DomainToViewModelMappingProfile : Profile
     {
         public DomainToViewModelMappingProfile()
         {
             CreateMap<Usuario, UsuarioEnvelopeJson>();
         }
-        
+
     }
 }

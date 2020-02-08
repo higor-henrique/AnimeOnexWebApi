@@ -19,6 +19,13 @@ namespace AnimeOnexWebAPI
 				routeTemplate: "api/{controller}/{id}",
 				defaults: new { id = RouteParameter.Optional }
 			);
+			config.EnableCors();
+
+
+			//aparentemente para serializar o json 
+			var json = config.Formatters.JsonFormatter;
+			json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+			config.Formatters.Remove(config.Formatters.XmlFormatter);
 		}
 	}
 }

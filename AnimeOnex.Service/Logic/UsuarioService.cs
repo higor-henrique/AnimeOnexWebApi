@@ -27,14 +27,14 @@ namespace AnimeOnex.Service.Logic
 		{
 			return this.Browsable(predicate).Count();
 		}
-  
+
 
 		public Usuario Add(Usuario entity)
 		{
 			context.Usuario.Add(entity);
 			context.SaveChanges();
 			return entity;
-			
+
 		}
 
 		public Object Read(Usuario ususario)

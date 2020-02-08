@@ -1,0 +1,66 @@
+﻿@model AnimeOnex.ModelData.Logic.Episodio
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Episodio</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vizualizacoes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vizualizacoes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.duracaoMin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.duracaoMin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numeroDoEpisodio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numeroDoEpisodio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.caminhoDoArquivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.caminhoDoArquivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anime.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Anime.titulo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.episodioID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

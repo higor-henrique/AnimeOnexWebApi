@@ -5,7 +5,7 @@ namespace AnimeOnex.EnvelopeJson.Logic
 {
     public class UsuarioEnvelopeJson
     {
-        
+
         [JsonProperty(PropertyName = "usuarioID")]
         public int ususarioID { get; set; }
 

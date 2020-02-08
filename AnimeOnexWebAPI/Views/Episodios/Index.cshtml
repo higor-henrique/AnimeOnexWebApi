@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AnimeOnex.ModelData.Logic.Episodio>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vizualizacoes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.duracaoMin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numeroDoEpisodio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.caminhoDoArquivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Anime.titulo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vizualizacoes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.duracaoMin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.numeroDoEpisodio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.caminhoDoArquivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Anime.titulo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.episodioID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.episodioID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.episodioID })
+        </td>
+    </tr>
+}
+
+</table>
