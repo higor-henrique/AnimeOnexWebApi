@@ -11,107 +11,107 @@ using EntityState = System.Data.Entity.EntityState;
 
 namespace AnimeOnexWebAPI.Controllers
 {
-    public class UsuariosController : Controller
+    public class AnimesController : Controller
     {
         private AnimeOnexDBEntities db = new AnimeOnexDBEntities();
 
-        // GET: Usuarios
+        // GET: Animes
         public ActionResult Index()
         {
-            return View(db.Usuario.ToList());
+            return View(db.Anime.ToList());
         }
 
-        // GET: Usuarios/Details/5
+        // GET: Animes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
+            Anime anime = db.Anime.Find(id);
+            if (anime == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View(anime);
         }
 
-        // GET: Usuarios/Create
+        // GET: Animes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Usuarios/Create
+        // POST: Animes/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "usuarioID,nickname,email,senha,caminhoDaImagem")] Usuario usuario)
+        public ActionResult Create([Bind(Include = "animeID,titulo,dataEstreia,numeroDeTemporadas,quantidadeDeEpisodios,studio,sinopse,caminhoDaImagem")] Anime anime)
         {
             if (ModelState.IsValid)
             {
-                db.Usuario.Add(usuario);
+                db.Anime.Add(anime);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(usuario);
+            return View(anime);
         }
 
-        // GET: Usuarios/Edit/5
+        // GET: Animes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
+            Anime anime = db.Anime.Find(id);
+            if (anime == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View(anime);
         }
 
-        // POST: Usuarios/Edit/5
+        // POST: Animes/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "usuarioID,nickname,email,senha,caminhoDaImagem")] Usuario usuario)
+        public ActionResult Edit([Bind(Include = "animeID,titulo,dataEstreia,numeroDeTemporadas,quantidadeDeEpisodios,studio,sinopse,caminhoDaImagem")] Anime anime)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(usuario).State = EntityState.Modified;
+                db.Entry(anime).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(usuario);
+            return View(anime);
         }
 
-        // GET: Usuarios/Delete/5
+        // GET: Animes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
+            Anime anime = db.Anime.Find(id);
+            if (anime == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View(anime);
         }
 
-        // POST: Usuarios/Delete/5
+        // POST: Animes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Usuario usuario = db.Usuario.Find(id);
-            db.Usuario.Remove(usuario);
+            Anime anime = db.Anime.Find(id);
+            db.Anime.Remove(anime);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

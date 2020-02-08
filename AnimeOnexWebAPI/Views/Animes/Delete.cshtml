@@ -1,0 +1,80 @@
+﻿@model AnimeOnex.ModelData.Logic.Anime
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Anime</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataEstreia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataEstreia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numeroDeTemporadas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numeroDeTemporadas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.quantidadeDeEpisodios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantidadeDeEpisodios)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.studio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.studio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sinopse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sinopse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.caminhoDaImagem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.caminhoDaImagem)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

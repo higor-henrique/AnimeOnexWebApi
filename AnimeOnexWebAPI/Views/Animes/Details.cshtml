@@ -1,0 +1,74 @@
+﻿@model AnimeOnex.ModelData.Logic.Anime
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Anime</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataEstreia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataEstreia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numeroDeTemporadas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numeroDeTemporadas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.quantidadeDeEpisodios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantidadeDeEpisodios)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.studio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.studio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sinopse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sinopse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.caminhoDaImagem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.caminhoDaImagem)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.animeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

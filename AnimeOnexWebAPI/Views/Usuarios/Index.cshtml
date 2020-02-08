@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AnimeOnex.ModelData.Logic.Usuario>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nickname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.senha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.caminhoDaImagem)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nickname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.senha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.caminhoDaImagem)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.usuarioID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.usuarioID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.usuarioID })
+        </td>
+    </tr>
+}
+
+</table>

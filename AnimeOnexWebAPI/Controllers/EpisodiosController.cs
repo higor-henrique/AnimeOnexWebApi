@@ -11,107 +11,112 @@ using EntityState = System.Data.Entity.EntityState;
 
 namespace AnimeOnexWebAPI.Controllers
 {
-    public class UsuariosController : Controller
+    public class EpisodiosController : Controller
     {
         private AnimeOnexDBEntities db = new AnimeOnexDBEntities();
 
-        // GET: Usuarios
+        // GET: Episodios
         public ActionResult Index()
         {
-            return View(db.Usuario.ToList());
+            var episodio = db.Episodio.Include(e => e.Anime);
+            return View(episodio.ToList());
         }
 
-        // GET: Usuarios/Details/5
+        // GET: Episodios/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
+            Episodio episodio = db.Episodio.Find(id);
+            if (episodio == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View(episodio);
         }
 
-        // GET: Usuarios/Create
+        // GET: Episodios/Create
         public ActionResult Create()
         {
+            ViewBag.animeID = new SelectList(db.Anime, "animeID", "titulo");
             return View();
         }
 
-        // POST: Usuarios/Create
+        // POST: Episodios/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "usuarioID,nickname,email,senha,caminhoDaImagem")] Usuario usuario)
+        public ActionResult Create([Bind(Include = "episodioID,animeID,titulo,vizualizacoes,duracaoMin,numeroDoEpisodio,caminhoDoArquivo")] Episodio episodio)
         {
             if (ModelState.IsValid)
             {
-                db.Usuario.Add(usuario);
+                db.Episodio.Add(episodio);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(usuario);
+            ViewBag.animeID = new SelectList(db.Anime, "animeID", "titulo", episodio.animeID);
+            return View(episodio);
         }
 
-        // GET: Usuarios/Edit/5
+        // GET: Episodios/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
+            Episodio episodio = db.Episodio.Find(id);
+            if (episodio == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            ViewBag.animeID = new SelectList(db.Anime, "animeID", "titulo", episodio.animeID);
+            return View(episodio);
         }
 
-        // POST: Usuarios/Edit/5
+        // POST: Episodios/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "usuarioID,nickname,email,senha,caminhoDaImagem")] Usuario usuario)
+        public ActionResult Edit([Bind(Include = "episodioID,animeID,titulo,vizualizacoes,duracaoMin,numeroDoEpisodio,caminhoDoArquivo")] Episodio episodio)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(usuario).State = EntityState.Modified;
+                db.Entry(episodio).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(usuario);
+            ViewBag.animeID = new SelectList(db.Anime, "animeID", "titulo", episodio.animeID);
+            return View(episodio);
         }
 
-        // GET: Usuarios/Delete/5
+        // GET: Episodios/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
+            Episodio episodio = db.Episodio.Find(id);
+            if (episodio == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View(episodio);
         }
 
-        // POST: Usuarios/Delete/5
+        // POST: Episodios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Usuario usuario = db.Usuario.Find(id);
-            db.Usuario.Remove(usuario);
+            Episodio episodio = db.Episodio.Find(id);
+            db.Episodio.Remove(episodio);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

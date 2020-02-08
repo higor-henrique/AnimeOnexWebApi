@@ -11,107 +11,116 @@ using EntityState = System.Data.Entity.EntityState;
 
 namespace AnimeOnexWebAPI.Controllers
 {
-    public class UsuariosController : Controller
+    public class ComentariosController : Controller
     {
         private AnimeOnexDBEntities db = new AnimeOnexDBEntities();
 
-        // GET: Usuarios
+        // GET: Comentarios
         public ActionResult Index()
         {
-            return View(db.Usuario.ToList());
+            var comentario = db.Comentario.Include(c => c.Episodio).Include(c => c.Usuario);
+            return View(comentario.ToList());
         }
 
-        // GET: Usuarios/Details/5
+        // GET: Comentarios/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
+            Comentario comentario = db.Comentario.Find(id);
+            if (comentario == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View(comentario);
         }
 
-        // GET: Usuarios/Create
+        // GET: Comentarios/Create
         public ActionResult Create()
         {
+            ViewBag.episodioID = new SelectList(db.Episodio, "episodioID", "titulo");
+            ViewBag.usuarioID = new SelectList(db.Usuario, "usuarioID", "nickname");
             return View();
         }
 
-        // POST: Usuarios/Create
+        // POST: Comentarios/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "usuarioID,nickname,email,senha,caminhoDaImagem")] Usuario usuario)
+        public ActionResult Create([Bind(Include = "comentarioID,usuarioID,episodioID,texto,dataComentario")] Comentario comentario)
         {
             if (ModelState.IsValid)
             {
-                db.Usuario.Add(usuario);
+                db.Comentario.Add(comentario);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(usuario);
+            ViewBag.episodioID = new SelectList(db.Episodio, "episodioID", "titulo", comentario.episodioID);
+            ViewBag.usuarioID = new SelectList(db.Usuario, "usuarioID", "nickname", comentario.usuarioID);
+            return View(comentario);
         }
 
-        // GET: Usuarios/Edit/5
+        // GET: Comentarios/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
+            Comentario comentario = db.Comentario.Find(id);
+            if (comentario == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            ViewBag.episodioID = new SelectList(db.Episodio, "episodioID", "titulo", comentario.episodioID);
+            ViewBag.usuarioID = new SelectList(db.Usuario, "usuarioID", "nickname", comentario.usuarioID);
+            return View(comentario);
         }
 
-        // POST: Usuarios/Edit/5
+        // POST: Comentarios/Edit/5
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "usuarioID,nickname,email,senha,caminhoDaImagem")] Usuario usuario)
+        public ActionResult Edit([Bind(Include = "comentarioID,usuarioID,episodioID,texto,dataComentario")] Comentario comentario)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(usuario).State = EntityState.Modified;
+                db.Entry(comentario).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(usuario);
+            ViewBag.episodioID = new SelectList(db.Episodio, "episodioID", "titulo", comentario.episodioID);
+            ViewBag.usuarioID = new SelectList(db.Usuario, "usuarioID", "nickname", comentario.usuarioID);
+            return View(comentario);
         }
 
-        // GET: Usuarios/Delete/5
+        // GET: Comentarios/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
+            Comentario comentario = db.Comentario.Find(id);
+            if (comentario == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View(comentario);
         }
 
-        // POST: Usuarios/Delete/5
+        // POST: Comentarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Usuario usuario = db.Usuario.Find(id);
-            db.Usuario.Remove(usuario);
+            Comentario comentario = db.Comentario.Find(id);
+            db.Comentario.Remove(comentario);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
