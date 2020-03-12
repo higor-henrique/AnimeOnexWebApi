@@ -9,62 +9,48 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using AnimeOnex.ModelData.Logic;
-using System.Web.Http.Cors;
-using AnimeOnex.Business.Logic;
 using EntityState = System.Data.Entity.EntityState;
 
 namespace AnimeOnexWebAPI.Controllers
 {
-    public class UsuarioController : ApiController
+    public class ComentarioController : ApiController
     {
-        private UsuarioBusiness usuarioBusiness;
         private AnimeOnexDBEntities db = new AnimeOnexDBEntities();
-        public UsuarioController() {
-            usuarioBusiness = new UsuarioBusiness();
-        }
 
-
-        // GET: api/Usuario
-        public IQueryable<Usuario> GetUsuario()
+        // GET: api/Comentario
+        public IQueryable<Comentario> GetComentario()
         {
-
-            IQueryable<Usuario> usuario = usuarioBusiness.Browsable();
-            usuarioBusiness.EsqueciSenha("higheitor@gmail.com", "higor");
-            return usuario;
+            return db.Comentario;
         }
- 
 
+        // GET: api/Comentario/5
+        [ResponseType(typeof(Comentario))]
+        public IHttpActionResult GetComentario(int id)
+        {
+            Comentario comentario = db.Comentario.Find(id);
+            if (comentario == null)
+            {
+                return NotFound();
+            }
 
-        //// GET: api/Usuario/5
-        //[ResponseType(typeof(Usuario))]
-        //public IHttpActionResult GetUsuario(int id)
-        //{
-        //    Usuario usuario = db.Usuario.Find(id);
-        //    if (usuario == null)
-        //    {
-        //        return NotFound();
-        //    }
+            return Ok(comentario);
+        }
 
-        //    return Ok(usuario);
-
-        //}
-
-        
-        // PUT: api/Usuario/5
+        // PUT: api/Comentario/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUsuario(int id, Usuario usuario)
+        public IHttpActionResult PutComentario(int id, Comentario comentario)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != usuario.usuarioID)
+            if (id != comentario.comentarioID)
             {
                 return BadRequest();
             }
 
-            db.Entry(usuario).State = EntityState.Modified;
+            db.Entry(comentario).State = EntityState.Modified;
 
             try
             {
@@ -72,7 +58,7 @@ namespace AnimeOnexWebAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsuarioExists(id))
+                if (!ComentarioExists(id))
                 {
                     return NotFound();
                 }
@@ -85,16 +71,16 @@ namespace AnimeOnexWebAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Usuario
-        [ResponseType(typeof(Usuario))]
-        public IHttpActionResult PostUsuario(Usuario usuario)
+        // POST: api/Comentario
+        [ResponseType(typeof(Comentario))]
+        public IHttpActionResult PostComentario(Comentario comentario)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Usuario.Add(usuario);
+            db.Comentario.Add(comentario);
 
             try
             {
@@ -102,7 +88,7 @@ namespace AnimeOnexWebAPI.Controllers
             }
             catch (DbUpdateException)
             {
-                if (UsuarioExists(usuario.usuarioID))
+                if (ComentarioExists(comentario.comentarioID))
                 {
                     return Conflict();
                 }
@@ -112,23 +98,23 @@ namespace AnimeOnexWebAPI.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = usuario.usuarioID }, usuario);
+            return CreatedAtRoute("DefaultApi", new { id = comentario.comentarioID }, comentario);
         }
 
-        // DELETE: api/Usuario/5
-        [ResponseType(typeof(Usuario))]
-        public IHttpActionResult DeleteUsuario(int id)
+        // DELETE: api/Comentario/5
+        [ResponseType(typeof(Comentario))]
+        public IHttpActionResult DeleteComentario(int id)
         {
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
+            Comentario comentario = db.Comentario.Find(id);
+            if (comentario == null)
             {
                 return NotFound();
             }
 
-            db.Usuario.Remove(usuario);
+            db.Comentario.Remove(comentario);
             db.SaveChanges();
 
-            return Ok(usuario);
+            return Ok(comentario);
         }
 
         protected override void Dispose(bool disposing)
@@ -140,13 +126,9 @@ namespace AnimeOnexWebAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UsuarioExists(int id)
+        private bool ComentarioExists(int id)
         {
-            return db.Usuario.Count(e => e.usuarioID == id) > 0;
+            return db.Comentario.Count(e => e.comentarioID == id) > 0;
         }
     }
-
-
-
-
 }

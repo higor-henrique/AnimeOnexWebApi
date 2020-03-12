@@ -9,62 +9,61 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using AnimeOnex.ModelData.Logic;
-using System.Web.Http.Cors;
-using AnimeOnex.Business.Logic;
 using EntityState = System.Data.Entity.EntityState;
+using AnimeOnex.Business.Logic;
+
 
 namespace AnimeOnexWebAPI.Controllers
 {
-    public class UsuarioController : ApiController
+    public class EpisodioController : ApiController
     {
-        private UsuarioBusiness usuarioBusiness;
         private AnimeOnexDBEntities db = new AnimeOnexDBEntities();
-        public UsuarioController() {
-            usuarioBusiness = new UsuarioBusiness();
-        }
+        private EpisodioBusiness episodioBusiness;
 
-
-        // GET: api/Usuario
-        public IQueryable<Usuario> GetUsuario()
+        public EpisodioController ()
         {
-
-            IQueryable<Usuario> usuario = usuarioBusiness.Browsable();
-            usuarioBusiness.EsqueciSenha("higheitor@gmail.com", "higor");
-            return usuario;
+            episodioBusiness = new EpisodioBusiness();
         }
- 
+
+        // GET: api/Episodio
+        [ResponseType(typeof(Episodio))]
+        public List<Episodio> GetEpisodio()
+        {
+            List < Episodio > episodios= new List<Episodio>();
+            episodios = episodioBusiness.Browsable().ToList();
+            return episodios;
 
 
-        //// GET: api/Usuario/5
-        //[ResponseType(typeof(Usuario))]
-        //public IHttpActionResult GetUsuario(int id)
-        //{
-        //    Usuario usuario = db.Usuario.Find(id);
-        //    if (usuario == null)
-        //    {
-        //        return NotFound();
-        //    }
+        }
 
-        //    return Ok(usuario);
+        // GET: api/Episodio/5
+        [ResponseType(typeof(Episodio))]
+        public IHttpActionResult GetEpisodio(int id)
+        {
+            Episodio episodio = db.Episodio.Find(id);
+            if (episodio == null)
+            {
+                return NotFound();
+            }
 
-        //}
+            return Ok(episodio);
+        }
 
-        
-        // PUT: api/Usuario/5
+        // PUT: api/Episodio/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUsuario(int id, Usuario usuario)
+        public IHttpActionResult PutEpisodio(int id, Episodio episodio)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != usuario.usuarioID)
+            if (id != episodio.episodioID)
             {
                 return BadRequest();
             }
 
-            db.Entry(usuario).State = EntityState.Modified;
+            db.Entry(episodio).State = EntityState.Modified;
 
             try
             {
@@ -72,7 +71,7 @@ namespace AnimeOnexWebAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsuarioExists(id))
+                if (!EpisodioExists(id))
                 {
                     return NotFound();
                 }
@@ -85,16 +84,16 @@ namespace AnimeOnexWebAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Usuario
-        [ResponseType(typeof(Usuario))]
-        public IHttpActionResult PostUsuario(Usuario usuario)
+        // POST: api/Episodio
+        [ResponseType(typeof(Episodio))]
+        public IHttpActionResult PostEpisodio(Episodio episodio)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Usuario.Add(usuario);
+            db.Episodio.Add(episodio);
 
             try
             {
@@ -102,7 +101,7 @@ namespace AnimeOnexWebAPI.Controllers
             }
             catch (DbUpdateException)
             {
-                if (UsuarioExists(usuario.usuarioID))
+                if (EpisodioExists(episodio.episodioID))
                 {
                     return Conflict();
                 }
@@ -112,23 +111,23 @@ namespace AnimeOnexWebAPI.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = usuario.usuarioID }, usuario);
+            return CreatedAtRoute("DefaultApi", new { id = episodio.episodioID }, episodio);
         }
 
-        // DELETE: api/Usuario/5
-        [ResponseType(typeof(Usuario))]
-        public IHttpActionResult DeleteUsuario(int id)
+        // DELETE: api/Episodio/5
+        [ResponseType(typeof(Episodio))]
+        public IHttpActionResult DeleteEpisodio(int id)
         {
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
+            Episodio episodio = db.Episodio.Find(id);
+            if (episodio == null)
             {
                 return NotFound();
             }
 
-            db.Usuario.Remove(usuario);
+            db.Episodio.Remove(episodio);
             db.SaveChanges();
 
-            return Ok(usuario);
+            return Ok(episodio);
         }
 
         protected override void Dispose(bool disposing)
@@ -140,13 +139,9 @@ namespace AnimeOnexWebAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UsuarioExists(int id)
+        private bool EpisodioExists(int id)
         {
-            return db.Usuario.Count(e => e.usuarioID == id) > 0;
+            return db.Episodio.Count(e => e.episodioID == id) > 0;
         }
     }
-
-
-
-
 }

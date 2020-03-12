@@ -22,10 +22,12 @@ namespace AnimeOnexWebAPI
 			config.EnableCors();
 
 
-			//aparentemente para serializar o json 
+			////aparentemente para serializar o json 
 			var json = config.Formatters.JsonFormatter;
 			json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
 			config.Formatters.Remove(config.Formatters.XmlFormatter);
+			//var jsonFormater = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
+			//jsonFormater.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All;
 		}
 	}
 }

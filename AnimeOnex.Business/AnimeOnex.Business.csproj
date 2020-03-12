@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logic\EpisodioBusiness.cs" />
     <Compile Include="Logic\UsuarioBusiness.cs" />
     <Compile Include="Mappers\AutoMapperConfig.cs" />
     <Compile Include="Mappers\DomainToViewModelMappingProfile.cs" />
@@ -66,6 +67,10 @@
     <ProjectReference Include="..\AnimeOnex.Service\AnimeOnex.Service.csproj">
       <Project>{a7e94192-6cd2-4b1e-96da-3bbec55a6357}</Project>
       <Name>AnimeOnex.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AnimeOnex.Util\AnimeOnex.Util.csproj">
+      <Project>{ceadd60d-13c5-4994-a044-0a485e1a3515}</Project>
+      <Name>AnimeOnex.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

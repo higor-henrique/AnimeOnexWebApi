@@ -67,6 +67,7 @@ namespace AnimeOnex.Service.Logic
 			if (predicate != null)
 			{
 				return this.context.Usuario.Where(predicate);
+				
 			}
 			else
 			{

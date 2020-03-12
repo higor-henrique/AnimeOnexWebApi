@@ -9,62 +9,48 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using AnimeOnex.ModelData.Logic;
-using System.Web.Http.Cors;
-using AnimeOnex.Business.Logic;
 using EntityState = System.Data.Entity.EntityState;
 
 namespace AnimeOnexWebAPI.Controllers
 {
-    public class UsuarioController : ApiController
+    public class AnimeController : ApiController
     {
-        private UsuarioBusiness usuarioBusiness;
         private AnimeOnexDBEntities db = new AnimeOnexDBEntities();
-        public UsuarioController() {
-            usuarioBusiness = new UsuarioBusiness();
-        }
 
-
-        // GET: api/Usuario
-        public IQueryable<Usuario> GetUsuario()
+        // GET: api/Anime
+        public IQueryable<Anime> GetAnime()
         {
-
-            IQueryable<Usuario> usuario = usuarioBusiness.Browsable();
-            usuarioBusiness.EsqueciSenha("higheitor@gmail.com", "higor");
-            return usuario;
+            return db.Anime;
         }
- 
 
+        // GET: api/Anime/5
+        [ResponseType(typeof(Anime))]
+        public IHttpActionResult GetAnime(int id)
+        {
+            Anime anime = db.Anime.Find(id);
+            if (anime == null)
+            {
+                return NotFound();
+            }
 
-        //// GET: api/Usuario/5
-        //[ResponseType(typeof(Usuario))]
-        //public IHttpActionResult GetUsuario(int id)
-        //{
-        //    Usuario usuario = db.Usuario.Find(id);
-        //    if (usuario == null)
-        //    {
-        //        return NotFound();
-        //    }
+            return Ok(anime);
+        }
 
-        //    return Ok(usuario);
-
-        //}
-
-        
-        // PUT: api/Usuario/5
+        // PUT: api/Anime/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUsuario(int id, Usuario usuario)
+        public IHttpActionResult PutAnime(int id, Anime anime)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != usuario.usuarioID)
+            if (id != anime.animeID)
             {
                 return BadRequest();
             }
 
-            db.Entry(usuario).State = EntityState.Modified;
+            db.Entry(anime).State = EntityState.Modified;
 
             try
             {
@@ -72,7 +58,7 @@ namespace AnimeOnexWebAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsuarioExists(id))
+                if (!AnimeExists(id))
                 {
                     return NotFound();
                 }
@@ -85,16 +71,16 @@ namespace AnimeOnexWebAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Usuario
-        [ResponseType(typeof(Usuario))]
-        public IHttpActionResult PostUsuario(Usuario usuario)
+        // POST: api/Anime
+        [ResponseType(typeof(Anime))]
+        public IHttpActionResult PostAnime(Anime anime)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Usuario.Add(usuario);
+            db.Anime.Add(anime);
 
             try
             {
@@ -102,7 +88,7 @@ namespace AnimeOnexWebAPI.Controllers
             }
             catch (DbUpdateException)
             {
-                if (UsuarioExists(usuario.usuarioID))
+                if (AnimeExists(anime.animeID))
                 {
                     return Conflict();
                 }
@@ -112,23 +98,23 @@ namespace AnimeOnexWebAPI.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = usuario.usuarioID }, usuario);
+            return CreatedAtRoute("DefaultApi", new { id = anime.animeID }, anime);
         }
 
-        // DELETE: api/Usuario/5
-        [ResponseType(typeof(Usuario))]
-        public IHttpActionResult DeleteUsuario(int id)
+        // DELETE: api/Anime/5
+        [ResponseType(typeof(Anime))]
+        public IHttpActionResult DeleteAnime(int id)
         {
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
+            Anime anime = db.Anime.Find(id);
+            if (anime == null)
             {
                 return NotFound();
             }
 
-            db.Usuario.Remove(usuario);
+            db.Anime.Remove(anime);
             db.SaveChanges();
 
-            return Ok(usuario);
+            return Ok(anime);
         }
 
         protected override void Dispose(bool disposing)
@@ -140,13 +126,9 @@ namespace AnimeOnexWebAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UsuarioExists(int id)
+        private bool AnimeExists(int id)
         {
-            return db.Usuario.Count(e => e.usuarioID == id) > 0;
+            return db.Anime.Count(e => e.animeID == id) > 0;
         }
     }
-
-
-
-
 }

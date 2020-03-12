@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeOnex.EnvelopeJson", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeOnex.Business", "AnimeOnex.Business\AnimeOnex.Business.csproj", "{D16D7DFF-48A6-4729-B90C-48A0F7D62587}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeOnex.Util", "AnimeOnex.Util\AnimeOnex.Util.csproj", "{CEADD60D-13C5-4994-A044-0A485E1A3515}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D16D7DFF-48A6-4729-B90C-48A0F7D62587}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D16D7DFF-48A6-4729-B90C-48A0F7D62587}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D16D7DFF-48A6-4729-B90C-48A0F7D62587}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEADD60D-13C5-4994-A044-0A485E1A3515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEADD60D-13C5-4994-A044-0A485E1A3515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEADD60D-13C5-4994-A044-0A485E1A3515}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEADD60D-13C5-4994-A044-0A485E1A3515}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

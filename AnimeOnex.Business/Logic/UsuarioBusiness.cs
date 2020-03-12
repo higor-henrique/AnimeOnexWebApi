@@ -6,16 +6,23 @@ using System.Collections.Generic;
 using AnimeOnex.Service.Logic;
 using AnimeOnex.EnvelopeJson.Logic;
 using AnimeOnex.ModelData.Logic;
+using AnimeOnex.Util.Pass;
+using AnimeOnex.Util.Mail;
+using System.Net;
+using System.Net.Mail;
 
 namespace AnimeOnex.Business.Logic
 {
     public class UsuarioBusiness
     {
         private UsuarioService usuarioService;
+        private Email email;
+
 
         public UsuarioBusiness()
         {
             usuarioService = new UsuarioService();
+            email = new Email();
         }
 
         public int Count
@@ -65,6 +72,31 @@ namespace AnimeOnex.Business.Logic
             return Mapper.Map<Usuario, UsuarioEnvelopeJson>(usuario);
         }
 
+
+        public bool EsqueciSenha(string email, string nickname)
+        {
+            
+            if(this.usuarioService.CountUsingParams(usuario => email.Equals(usuario.email) && nickname.Equals(usuario.nickname))> 0)
+            {
+                Usuario usuario = usuarioService.Browsable(usu => email.Equals(usu.email) && nickname.Equals(usu.nickname)).FirstOrDefault();
+
+                usuario.senha = gerarSenha();
+                this.email.Enviar();
+                
+                
+                return true;
+            }
+            return false;
+
+        }
+
+
+
+        public string gerarSenha()
+        {
+            string novaSenha = "asdaseSd";//Password.Generate(0,8);
+            return novaSenha;
+        }
 
     }
 }
